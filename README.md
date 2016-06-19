@@ -38,5 +38,5 @@ Run in Shell
 ```
 $ fileReader /path/to/file
 ```
-### response will be:
+### Example response will be:
 ![Image of response after command](https://github.com/kwtucker/fileReader/blob/master/examples/commandRes.png)
