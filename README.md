@@ -12,7 +12,8 @@ Golang File Reader will read file and look for commented out delimiters and remo
 |   +-- github.com
 ```
 
-#### Grabbing the repo through
+#### Go Get Repo
+This will place the project in you github.com directory.
 ```
 go get github.com/kwtucker/fileReader
 ```
