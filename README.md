@@ -5,8 +5,13 @@ Golang File Reader will read file and look for commented out delimiters and remo
 * Install Go
 * Set up go file structure
 * Install project
-
-## Run Script
+***
+## Usage
+In a file wrap commented out single line with (: :). Example Go comment:
+```
+// (:This will be read and deleted:)
+```
+### Run Script
 Run in Shell
 ```
 $ fileReader /path/to/file
