@@ -8,8 +8,8 @@
 * mocha - (globally)
 * istanbul - (globally)                   
 ## Getting Started
- 
 
+(:1:)
 ##### Installing Dependencies
 ```
 npm install
@@ -46,7 +46,7 @@ or
 DEBUG=true nodemon src/server.js
 ```
 ***
- 
+
 ## Debug Usage
 ``
 const util = require('path/to/lib/util');
@@ -96,7 +96,7 @@ istanbul cover _mocha
 * [Update artassets based upon id](#post-update-artassets-based-upon-id)
 
 
-
+(:2:)
 #### CRUD for Users
 --=-=-=-=-=-=-=-=-
 
@@ -173,8 +173,8 @@ istanbul cover _mocha
 ```
 1
 ```
- 
 
+(:3:)
 
 
 #### CRUD for Apps
@@ -297,7 +297,7 @@ istanbul cover _mocha
 ]
 ```
 
- 
+
 ##### POST Update App
 ```
 /api/apps/1
@@ -370,7 +370,7 @@ istanbul cover _mocha
  }
 ]
 ```
- 
+
 
 ##### GET Display one artassets from specific app id and artassetid
 ```
@@ -403,3 +403,4 @@ istanbul cover _mocha
  "appId": 2
 }
 ```
+(:4:)
