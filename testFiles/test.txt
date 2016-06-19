@@ -1,0 +1,11 @@
+hello(:This is first comment:)hello
+
+more more more text
+
+blah blah(:ANOTHER COMMENT:)blah blah
+
+(:This is second a comment:)
+
+holahola(:1:)holahola
+
+continue(:continue)
