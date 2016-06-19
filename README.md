@@ -3,7 +3,7 @@ Golang File Reader will read file and look for commented out delimiters and remo
 
 ## Getting Started
 * Install Go
-* Set up go file structure ![go file structure](https://golang.org/doc/code.html)
+* Set up go file structure -> <a href="https://golang.org/doc/code.html" target="_blank">go file structure</a>
 * Grab project through go get
 
 ### File Structure
