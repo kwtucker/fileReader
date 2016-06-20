@@ -29,6 +29,10 @@ In a file wrap commented out single line with (: :).
 
 No multi-line comment!
 
+##### How to Video
+
+* [Click Here](https://asciinema.org/a/49570)
+
 ##### Good Go comment:
 ```
 // (:This will be read and deleted:)
@@ -46,7 +50,6 @@ $ fileReader /path/to/file
 ```
 ### Example response will be:
 * ![Image of response after command](https://github.com/kwtucker/fileReader/blob/master/examples/commandRes.png)
-* [How To Video](https://asciinema.org/a/49570)
 
 
 ## To Contribute
