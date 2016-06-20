@@ -3,6 +3,7 @@ Golang File Reader will read file and look for commented out delimiters and remo
 
 ### Created By:
 [Krysler Pinto](https://github.com/PintoKrysler)
+
 [Kevin Tucker](https://github.com/kwtucker)
 
 ## Getting Started
