@@ -1,6 +1,10 @@
 # fileReader
 Golang File Reader will read file and look for commented out delimiters and remove them.
 
+### Created By:
+[Krysler Pinto](https://github.com/PintoKrysler)
+[Kevin Tucker](https://github.com/kwtucker)
+
 ## Getting Started
 * Install Go
 * Set up go file structure -> [go file structure](https://golang.org/doc/code.html)
@@ -41,3 +45,7 @@ $ fileReader /path/to/file
 ```
 ### Example response will be:
 ![Image of response after command](https://github.com/kwtucker/fileReader/blob/master/examples/commandRes.png)
+
+
+## To Contribute
+Fork Repo and Submit a pull request.
