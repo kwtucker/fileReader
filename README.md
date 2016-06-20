@@ -47,6 +47,8 @@ $ fileReader /path/to/file
 ### Example response will be:
 ![Image of response after command](https://github.com/kwtucker/fileReader/blob/master/examples/commandRes.png)
 
+![Video How too](https://asciinema.org/a/49570)
+
 
 ## To Contribute
 Fork Repo and Submit a pull request.
