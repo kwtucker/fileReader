@@ -4,7 +4,9 @@ more more more text
 
 blah blah(:ANOTHER COMMENT:)blah blah
 
-(:This is second a comment:)
+(:This is second a
+multi-line
+comment:)
 
 holahola(:1:)holahola
 

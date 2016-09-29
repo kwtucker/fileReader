@@ -1,5 +1,5 @@
 # fileReader
-Golang File Reader will read file and look for commented out delimiters and remove them.
+Golang File Reader will read file and look for commented out delimiters. It will then return a slice of all comments inside delimiters. It will leave the comments and remove the delimiters.
 
 ### Created By:
 [Krysler Pinto](https://github.com/PintoKrysler)
@@ -27,8 +27,6 @@ go get github.com/kwtucker/fileReader
 ## Usage
 In a file wrap commented out single line with (: :).
 
-No multi-line comment!
-
 ##### How to Video
 
 * [Click Here](https://asciinema.org/a/49570)
@@ -37,20 +35,28 @@ No multi-line comment!
 ```
 // (:This will be read and deleted:)
 ```
-##### Bad Go Comment:
+
 ```
 // (:This will be read
 // and deleted:)
 ```
 
-### Run Script
-Run in Shell
-```
-$ fileReader /path/to/file
-```
-### Example response will be:
-* ![Image of response after command](https://github.com/kwtucker/fileReader/blob/master/examples/commandRes.png)
+### Usage
+```go
+ import (
+   "github.com/kwtucker/fileReader"
+ )
 
+ func Example() {
+   dataSlice := fileReader.ReadFile("~/Desktop/example.txt")
+   fmt.Println(dataSlice)
+ }
+```
+
+#### Fmt Println Response
+```
+[comment, comment2]
+```
 
 ## To Contribute
 Fork Repo and Submit a pull request.
