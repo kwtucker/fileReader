@@ -48,7 +48,7 @@ In a file wrap commented out single line with (: :).
  )
 
  func Example() {
-   dataSlice := fileReader.ReadFile("~/Desktop/example.txt")
+   dataSlice := fileReader.ReadFile("~/Desktop/example.go")
    fmt.Println(dataSlice)
  }
 ```
