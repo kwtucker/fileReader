@@ -1,64 +1,104 @@
-package main
+package fileReader
 
 import (
 	"bufio"
 	"fmt"
+	"github.com/deckarep/gosx-notifier"
 	"io/ioutil"
 	"os"
+	"os/exec"
+	"runtime"
 	"strings"
+	"time"
 )
 
-func checkError(err error) {
+// ReadFile reades files and writes
+func ReadFile(filename string) []string {
+
+	// Set notification values
+	notifyTitle := "Save Files"
+	notifyMessage := "Forgit Event In 15 seconds"
+
+	var (
+		slice        = []string{}
+		concatSwitch = false
+		temp         string
+	)
+	// Check which OS the user is using then notify them.
+	switch runtime.GOOS {
+	case "darwin":
+		// osx notification
+		note := gosxnotifier.NewNotification(notifyMessage)
+		note.Title = notifyTitle
+		note.AppIcon = "logo_icon.png"
+		err := note.Push()
+		if err != nil {
+			fmt.Println("Uh oh!")
+		}
+	case "linux":
+		exec.Command("notify-send", "-i", "./logo_icon.png", notifyTitle, notifyMessage, "-u", "critical").Run()
+	}
+
+	// Delay the app from reading and writing for
+	time.Sleep(time.Second * 15)
+
+	// opens file with read and write permissions
+	file, err := os.OpenFile(filename, os.O_RDWR, 0666)
 	if err != nil {
 		fmt.Println(err.Error())
 		os.Exit(0)
 	}
-}
 
-func main() {
-	// the filename or path that is passed in. Then reads the file into memory.
-	filename := os.Args[1]
-	_, err := ioutil.ReadFile(filename)
-	checkError(err)
+	// Will close the file after main function is finished
+	defer file.Close()
 
-	// opens file with read and write permissions
-	file, err := os.OpenFile(filename, os.O_RDWR, 0666)
-	checkError(err)
-
+	// Grab contents of file
 	read, err := ioutil.ReadFile(filename)
 	if err != nil {
 		panic(err)
 	}
 
-	// File content
+	// File content to string
 	newContents := string(read)
 
-	// It’s idiomatic to defer a Close immediately after opening a file.
-	defer file.Close()
-
-	// Setting a scanner and writer.
+	// Setting a scanner buffer layer
 	scanner := bufio.NewScanner(file)
-
-	// Initializing a array.
-	var slice = []string{}
 
 	// loop through the file.
 	for scanner.Scan() {
 		line := scanner.Text()
-
-		// Look through the line and check for the start and end delimiter.
-		// Then slice the start to the end.
-		if strings.Contains(line, "(:") && strings.Contains(line, ":)") {
-			lineDelimiter_Start := strings.Index(line, "(:")
-			lineDelimiter_End := strings.Index(line, ":)")
-
-			lineSlice := line[lineDelimiter_Start+2 : lineDelimiter_End]
-			slice = append(slice, lineSlice)
-
-			comment := "(:" + lineSlice + ":)"
-
-			// Replace in the file string the comment with a white space
-			newContents = strings.Replace(newContents, comment, " ", -1)
+		for i := 0; i < len(line); i++ {
+			if string(line[i]) == "(" && i+1 < len(line) && string(line[i+1]) == ":" && concatSwitch == false {
+				concatSwitch = true
+				lineDelimiterStart := strings.Index(line, "(:")
+				lineSliceStart := line[lineDelimiterStart : lineDelimiterStart+2]
+				newContents = strings.Replace(newContents, lineSliceStart, " ", -1)
+				i++
+			} else {
+				if concatSwitch == true {
+					if string(line[i]) == "(" && i+1 < len(line) && string(line[i+1]) == ":" && concatSwitch == true {
+						temp = ""
+						concatSwitch = true
+						lineDelimiterStart := strings.Index(line, "(:")
+						lineSliceStart := line[lineDelimiterStart : lineDelimiterStart+2]
+						newContents = strings.Replace(newContents, lineSliceStart, lineSliceStart, -1)
+						i++
+					} else if string(line[i]) == ":" && i+1 < len(line) && string(line[i+1]) == ")" {
+						concatSwitch = false
+						// Removes the end delimiter by finding the start index,
+						// making a slice of the delimiter
+						// and replacing it will empty strings
+						lineDelimiterEnd := strings.Index(line, ":)")
+						lineSliceEnd := line[lineDelimiterEnd : lineDelimiterEnd+2]
+						newContents = strings.Replace(newContents, lineSliceEnd, " ", -1)
+						slice = append(slice, temp)
+						temp = ""
+						i++
+					} else {
+						temp += string(line[i])
+					}
+				}
+			}
 		}
 	}
 
@@ -67,9 +107,7 @@ func main() {
 		panic(err)
 	}
 
-	fmt.Println("slice", slice)
-
 	// save changes
 	file.Sync()
-
+	return slice
 }
