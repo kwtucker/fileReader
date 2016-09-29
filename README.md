@@ -24,14 +24,7 @@ go get github.com/kwtucker/fileReader
 ```
 ---
 
-## Usage
-In a file wrap commented out single line with (: :).
-
-##### How to Video
-
-* [Click Here](https://asciinema.org/a/49570)
-
-##### Good Go comment:
+#### Good Go comment:
 ```
 // (:This will be read and deleted:)
 ```
