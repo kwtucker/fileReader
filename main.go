@@ -13,7 +13,7 @@ import (
 )
 
 // ReadFile reades files and writes
-func ReadFile(filename string) []string {
+func ReadFile(filename string, notify bool) []string {
 
 	// Set notification values
 	notifyTitle := "Save Files"
@@ -25,22 +25,24 @@ func ReadFile(filename string) []string {
 		temp         string
 	)
 	// Check which OS the user is using then notify them.
-	switch runtime.GOOS {
-	case "darwin":
-		// osx notification
-		note := gosxnotifier.NewNotification(notifyMessage)
-		note.Title = notifyTitle
-		note.AppIcon = "logo_icon.png"
-		err := note.Push()
-		if err != nil {
-			fmt.Println("Uh oh!")
+	if notify {
+		switch runtime.GOOS {
+		case "darwin":
+			// osx notification
+			note := gosxnotifier.NewNotification(notifyMessage)
+			note.Title = notifyTitle
+			note.AppIcon = "logo_icon.png"
+			err := note.Push()
+			if err != nil {
+				fmt.Println("Uh oh!")
+			}
+		case "linux":
+			exec.Command("notify-send", "-i", "./logo_icon.png", notifyTitle, notifyMessage, "-u", "critical").Run()
 		}
-	case "linux":
-		exec.Command("notify-send", "-i", "./logo_icon.png", notifyTitle, notifyMessage, "-u", "critical").Run()
-	}
 
-	// Delay the app from reading and writing for
-	time.Sleep(time.Second * 15)
+		// Delay the app from reading and writing for
+		time.Sleep(time.Second * 15)
+	}
 
 	// opens file with read and write permissions
 	file, err := os.OpenFile(filename, os.O_RDWR, 0666)
