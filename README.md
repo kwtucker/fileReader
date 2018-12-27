@@ -2,7 +2,7 @@
 Golang File Reader will read file and look for commented out delimiters. It will then return a slice of all comments inside delimiters. It will leave the comments and remove the delimiters.
 
 ### Created By:
-[Krysler Pinto](https://github.com/PintoKrysler)
+[Krysler Tucker](https://github.com/PintoKrysler)
 
 [Kevin Tucker](https://github.com/kwtucker)
 
